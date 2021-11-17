@@ -30,8 +30,8 @@ DIRECTORS = [
   }
 ]
 
-if os.path.exists('final_proj_pk.db'):
-    os.remove('final_proj_pk.db')
+if os.path.exists('final_project.db'):
+    os.remove('final_project.db')
 
 db.create_all()
 
