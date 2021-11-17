@@ -20,7 +20,7 @@ class Directors(db.Model):
 
 class Movies(db.Model):
     __tablename__ = 'movies'
-    #avocado_id = db.Column()
+    # avocado_id = db.Column()
     id = db.Column(db.Integer, primary_key=True)
     original_title = db.Column(db.Text)
     budget = db.Column(db.Integer)
@@ -71,7 +71,7 @@ class DirectorsMoviesSchema(ma.SQLAlchemyAutoSchema):
     director_id = fields.Int()
     original_title = fields.Str()
     overview = fields.Str()
-    popularity = fields.Str()
+    popularity = fields.Int()
     release_date = fields.Str()
     revenue = fields.Int()
     tagline = fields.Str()
@@ -94,4 +94,23 @@ class MoviesDirectorsSchema(ma.SQLAlchemyAutoSchema):
     name = fields.Str()
     uid = fields.Int()
 
+class DirectorsPostSchema(ma.SQLAlchemyAutoSchema):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+    
+    class Meta:
+        model = Directors
+        sqla_session = db.session
+        load_instance = True
+        #include_relationships = True
+        #unknown = EXCLUDE
 
+class MoviesPostSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Movies
+        sqla_session = db.session    
+        load_instance = True
+       #include_relationships = True
+       #unknown = EXCLUDE
+    
+    #directors = fields.Nested('MoviesDirectorsSchema', default=None)

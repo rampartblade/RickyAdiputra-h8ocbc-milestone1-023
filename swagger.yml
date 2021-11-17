@@ -55,7 +55,7 @@ paths:
                         type: integer
                         description: budget of movie
                       popularity:
-                        type: string
+                        type: integer
                         description: popularity of movie
                       release_date:
                         type: string
@@ -178,7 +178,7 @@ paths:
                         type: integer
                         description: budget of movie
                       popularity:
-                        type: string
+                        type: integer
                         description: popularity of movie
                       release_date:
                         type: string
@@ -272,6 +272,84 @@ paths:
         200:
           description: Successfully deleted a director
 
+  /director/{director_name}:
+    get:
+      operationId: director.read_one_name
+      tags:
+        - Director
+      summary: Read an item of directors
+      description: Read one directors
+      parameters:
+        - name: director_name
+          in: path
+          description: Name of the directors to get
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully read a directors from Director data operation
+          schema:
+            type: object
+            properties:
+                id:
+                  type: integer
+                  description: id of movie director
+                name:
+                  type: string
+                  description: name of movie director
+                gender:
+                  type: integer
+                  description: gender of movie director
+                uid:
+                  type: integer
+                  description: uid of movie director
+                department:
+                  type: string
+                  description: department of movie director
+                movies:
+                  type: array
+                  items:
+                    properties:
+                      id:
+                        type: integer
+                        description: id of movie
+                      original_title:
+                        type: string
+                        description: title of movie
+                      budget:
+                        type: integer
+                        description: budget of movie
+                      popularity:
+                        type: integer
+                        description: popularity of movie
+                      release_date:
+                        type: string
+                        description: date release of movie
+                      revenue:
+                        type: integer
+                        description: revenue of movie
+                      title:
+                        type: string
+                        description: title of movie
+                      vote_average:
+                        type: number
+                        description: rating of movie
+                      vote_count:
+                        type: integer
+                        description: voting of movie
+                      overview:
+                        type: string
+                        description: summary of movie
+                      tagline:
+                        type: string
+                        description: tagline of movie
+                      uid:
+                        type: integer
+                        description: uid of movie
+                      director_id:
+                        type: integer
+                        description: director id of movie
+
 ###################### MOVIE ENDPOINT #######################################
 
   /movie:
@@ -298,7 +376,7 @@ paths:
                   type: integer
                   description: budget of movie
                 popularity:
-                  type: string
+                  type: integer
                   description: popularity of movie
                 release_date:
                   type: string
@@ -355,7 +433,7 @@ paths:
                 type: integer
                 description: budget of movie
               popularity:
-                type: string
+                type: integer
                 description: popularity of movie
               release_date:
                 type: string
@@ -381,9 +459,6 @@ paths:
               uid:
                 type: integer
                 description: uid of movie
-              director_id:
-                type: integer
-                description: director id of movie
       responses:
         200:
           description: Successfully updated movie
@@ -396,7 +471,7 @@ paths:
                 type: integer
                 description: budget of movie
               popularity:
-                type: string
+                type: integer
                 description: popularity of movie
               release_date:
                 type: string
@@ -422,9 +497,6 @@ paths:
               uid:
                 type: integer
                 description: uid of movie
-              director_id:
-                type: integer
-                description: director id of movie
 
   /director/{director_id}/movie/{movie_id}:
     get:
@@ -460,7 +532,7 @@ paths:
                   type: integer
                   description: budget of movie
                 popularity:
-                  type: string
+                  type: integer
                   description: popularity of movie
                 release_date:
                   type: string
@@ -522,7 +594,7 @@ paths:
                   type: integer
                   description: budget of movie
                 popularity:
-                  type: string
+                  type: integer
                   description: popularity of movie
                 release_date:
                   type: string
@@ -566,7 +638,7 @@ paths:
                   type: integer
                   description: budget of movie
                 popularity:
-                  type: string
+                  type: integer
                   description: popularity of movie
                 release_date:
                   type: string
@@ -617,3 +689,25 @@ paths:
         200:
           description: Successfully deleted a note
 
+  /movie/{movie_title}:
+    get:
+      operationId: movie.read_one_name
+      tags:
+        - Movie
+      summary: Read a particular movie associated with director
+      description: Read a particular movie associated with director
+      parameters:
+        - name: movie_title
+          in: path
+          description: title of movie
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully read movie of one director
+          schema:
+            type: object
+            properties:
+                title:
+                  type: string
+                  description: title of movie
